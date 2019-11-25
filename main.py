@@ -7,6 +7,7 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
+
 def draw_ma():
     kline_1day = KlineApi.get_kline_5min()[::-1]
     times = list(map(lambda x: x['timestamp'], kline_1day))[120:]
@@ -26,7 +27,7 @@ def draw_ma():
             title_opts=TitleOpts(title="Line-smooth")
         )
     )
-    c.render()
+    logging.getLogger().info(c.render())
 
 
 def test():
