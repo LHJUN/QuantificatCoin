@@ -63,6 +63,13 @@ class KlineApi:
         logging.getLogger(__name__).info('获取完成')
         return map_kline_model(result)
 
+    @staticmethod
+    def get_kline_3min(start='', end=''):
+        logging.getLogger(__name__).info('开始获取3min K线数据...')
+        result = futureAPI.get_kline('EOS-USD-191227', 180, start=start, end=end)
+        logging.getLogger(__name__).info('获取完成')
+        return map_kline_model(result)
+
 
 def map_kline_model(data):
     kline_models = []

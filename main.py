@@ -13,11 +13,15 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(leve
 
 def test():
     flag = 0
-    kline5min = KlineApi.get_kline_5min(start='2019-03-24T02:31:00.000Z')
+    kline5min = []
+    t_kline5min = KlineApi.get_kline_3min()
+    for i in range(0, 6):
+        t_kline5min = KlineApi.get_kline_3min(end=t_kline5min[t_kline5min.__len__() - 1]['timestamp'])
+        kline5min.extend(t_kline5min)
     kline5min = kline5min[::-1]
     user = User()
     user.money = 5
-    for num in range(121, 299):
+    for num in range(121, 1000):
         result = permutation(kline5min[0:num])
         user.refresh_data(kline5min[num - 1])
         if user.can_sell():
